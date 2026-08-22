@@ -214,6 +214,18 @@ repos:
         language: system
         pass_filenames: false
 
+      - id: check-editable-sources
+        name: check editable packages
+        description: >-
+            Fail if [tool.uv.sources] local path overrides are enabled in pyproject.toml,
+            or if uv.lock resolved any package from a local/editable path. Prevents
+            committing a temporary "developer mode" override that would break CI/CD,
+            where the local path does not exist.
+        entry: uv run uv-developer check
+        files: '^(pyproject\.toml|uv\.lock)$'
+        language: system
+        pass_filenames: false
+
     #   - id: uv-audit
     #     name: uv audit
     #     description: check uv.lock for vulnerabilities
