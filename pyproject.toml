@@ -24,12 +24,12 @@ build-backend = "uv_build"
 name = "uv-developer"
 version = "0.1dev0"
 license = { file = "license.md" }
-description = ""
+description = "Toggle [tool.uv.sources] local path overrides in pyproject.toml on and off, and guard against committing them."
 readme = "docs/readme.md"
 requires-python = ">=3.9"
 authors = [{ name = "Wouter Vanden Hove", email = "wouter@libranet.eu" }]
 maintainers = [{ name = "Wouter Vanden Hove", email = "wouter@libranet.eu" }]
-keywords = [""]
+keywords = ["uv", "pyproject.toml", "dependencies", "editable-install", "local-development", "pre-commit", "cli"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console",
