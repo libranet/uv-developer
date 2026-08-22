@@ -63,5 +63,5 @@ import? '.just/uv.justfile'
 # Display all tasks (default recipe)
 [group: 'default']
 list-tasks:
-    @ {{just_executable()}} --list --unsorted 
+    @ {{just_executable()}} --list --unsorted
 
