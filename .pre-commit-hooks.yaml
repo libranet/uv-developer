@@ -1,0 +1,22 @@
+# Hook manifest exposing uv-developer to *consumer* projects via pre-commit.
+#
+# Usage in a downstream project's .pre-commit-config.yaml:
+#
+#   - repo: https://github.com/libranet/uv-developer
+#     rev: vX.Y.Z
+#     hooks:
+#       - id: uv-developer-check
+#
+# See: https://pre-commit.com/#creating-new-hooks
+
+- id: uv-developer-check
+  name: uv-developer check
+  description: >-
+    Fail if [tool.uv.sources] local path overrides are enabled in pyproject.toml,
+    or if uv.lock resolved any package from a local/editable path. Prevents
+    committing a temporary "developer mode" override that would break CI/CD,
+    where the local path does not exist.
+  entry: uv-developer check
+  language: python
+  files: '^(pyproject\.toml|uv\.lock)$'
+  pass_filenames: false
