@@ -1,5 +1,8 @@
 # uv-developer
 
+_The name is a pun on [mr.developer], the zc.buildout extension that solved the same
+"toggle a dependency to a local checkout while developing" problem for buildout-based projects._
+
 [![PyPI](https://img.shields.io/pypi/v/uv-developer.svg)][pypi status]
 [![Status](https://img.shields.io/pypi/status/uv-developer.svg)][pypi status]
 [![Python Version](https://img.shields.io/pypi/pyversions/uv-developer)][pypi status]
@@ -11,14 +14,6 @@
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)][ruff]
-
-[pypi status]: https://pypi.org/project/uv-developer/
-[read the docs]: https://uv-developer.readthedocs.io/
-[tests]: https://github.com/libranet/uv-developer/actions?workflow=Tests
-[codecov]: https://app.codecov.io/gh/libranet/uv-developer
-[pre-commit]: https://github.com/pre-commit/pre-commit
-[ruff]: https://github.com/astral-sh/ruff
-[uv]: https://docs.astral.sh/uv/
 
 ## Features
 
@@ -67,16 +62,23 @@ please [file an issue] along with a detailed description.
 
 This project was generated from [@libranet]'s [Kickstart Python Project] template.
 
-[@libranet]: https://github.com/libranet
-[pypi]: https://pypi.org/
-[kickstart python project]: https://github.com/libranet/kickstart-python-project
-[file an issue]: https://github.com/libranet/uv-developer/issues
-[pip]: https://pip.pypa.io/
-
 <!-- github-only -->
 
-[license]: https://github.com/libranet/uv-developer/blob/main/docs/license.md
-[contributor guide]: https://github.com/libranet/uv-developer/blob/main/docs/contributing.md
+[@libranet]: https://github.com/libranet
+[codecov]: https://app.codecov.io/gh/libranet/uv-developer
 [command-line reference]: https://uv-developer.readthedocs.io/en/latest/usage.html
-[introduction]: https://uv-developer.readthedocs.io/en/latest/introduction.html
+[contributor guide]: https://github.com/libranet/uv-developer/blob/main/docs/contributing.md
+[file an issue]: https://github.com/libranet/uv-developer/issues
 [installation]: https://uv-developer.readthedocs.io/en/latest/installation.html
+[introduction]: https://uv-developer.readthedocs.io/en/latest/introduction.html
+[kickstart python project]: https://github.com/libranet/kickstart-python-project
+[license]: https://github.com/libranet/uv-developer/blob/main/docs/license.md
+[mr.developer]: https://github.com/fschulze/mr.developer
+[pip]: https://pip.pypa.io/
+[pre-commit]: https://github.com/pre-commit/pre-commit
+[pypi]: https://pypi.org/
+[pypi status]: https://pypi.org/project/uv-developer/
+[read the docs]: https://uv-developer.readthedocs.io/
+[ruff]: https://github.com/astral-sh/ruff
+[tests]: https://github.com/libranet/uv-developer/actions?workflow=Tests
+[uv]: https://docs.astral.sh/uv/

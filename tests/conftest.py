@@ -33,4 +33,3 @@ def sample_data() -> dict:
 def sample_list() -> list[str]:
     """Provide a sample list for tests."""
     return ["foo", "bar", "baz"]
-

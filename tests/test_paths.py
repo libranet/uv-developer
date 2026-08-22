@@ -42,9 +42,7 @@ def test_find_upwards_leaves_absolute_paths_unchanged(tmp_path: pl.Path) -> None
     assert found == absolute
 
 
-def test_find_upwards_falls_back_to_start_when_not_found(
-    tmp_path: pl.Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
+def test_find_upwards_falls_back_to_start_when_not_found(tmp_path: pl.Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """Test a missing file resolves against `start`, for a clean "not found" error.
 
     Forces `Path.is_file` to always report "missing", regardless of the real filesystem --

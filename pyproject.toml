@@ -161,6 +161,7 @@ target-version = "py39"
 select = ["ALL"]
 ignore = [
     "COM812",  # conflicts with ruff format
+    "CPY001",  # missing copyright notice at top of file
     "ERA001",  # found commented code
     "G004",    # logging statement uses f-string
     "T201",    # print statement found
@@ -235,9 +236,8 @@ default-groups = "all"
 
 [tool.uv.sources]
 # Settings reference: https://docs.astral.sh/uv/reference/settings/#sources
-#
-# enable temporary local path overrides for development, but never commit
-# the key name must match the actual normalized project.name in pyproject.toml.
+# Enable temporary local path overrides for development, but do not commit.
+# The name-key must match the actual normalized project.name in pyproject.toml.
 
 # git clone git@github.com:libranet/sitecustomize-entrypoints.git .deps/sitecustomize-entrypoints
 # sitecustomize-entrypoints = { path = ".deps/sitecustomize-entrypoints", editable = true }
@@ -245,3 +245,5 @@ default-groups = "all"
 # git clone https://github.com/libranet/libranet-logging .deps/libranet-logging
 ## libranet-logging = { path = ".deps/libranet-logging", editable = true }
 
+# git clone https://github.com/libranet/libranet-logging .deps/libranet-logging
+## libranet-logging = { path = ".deps/libranet-logging", editable = true }

@@ -12,7 +12,7 @@ Add `uv-developer` as a dev dependency of the project whose `[tool.uv.sources]` 
 manage:
 
 ```console
-uv add --dev uv-developer
+uv add uv-developer --group dev
 ```
 
 Or with pip, into whatever environment your tooling runs in:

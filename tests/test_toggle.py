@@ -84,9 +84,7 @@ def test_toggle_sources_reports_no_entries(tmp_path: pl.Path) -> None:
     assert pyproject.read_text(encoding="utf-8") == original
 
 
-def test_toggle_sources_warns_when_missing_clone_comment(
-    tmp_path: pl.Path, capsys: pytest.CaptureFixture[str]
-) -> None:
+def test_toggle_sources_warns_when_missing_clone_comment(tmp_path: pl.Path, capsys: pytest.CaptureFixture[str]) -> None:
     """Test enabling without clone metadata warns but still enables the entry."""
     pyproject = tmp_path / "pyproject.toml"
     pyproject.write_text(
