@@ -8,7 +8,7 @@ For more information about conftest.py, please see:
  - https://pytest-flask.readthedocs.io/en/latest/tutorial.html
  - https://stackoverflow.com/questions/34466027/in-pytest-what-is-the-use-of-conftest-py-files
 
-The "_helpers"-directory contains code that can be re-used in various tests.
+The "_helpers"-directory contains code that can be reused in various tests.
 
 Note: The tests-directory itself is NOT a python-package (no __init__.py).
 Please avoid putting an __init.py-file in this directory.

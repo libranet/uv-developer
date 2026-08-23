@@ -2,7 +2,7 @@
 # ty
 
 
-# show verion of ty
+# show version of ty
 [group: 'ty']
 ty-version:
     @ uv run ty --version

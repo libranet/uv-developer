@@ -74,6 +74,7 @@ packaging = [
     "pyroma>=4.2",
 ]
 pre-commit = [
+    "codespell>=2.4.3",
     "pre-commit>=3.5",  # 3.5 still supports python3.8
     "pre-commit-hooks>=5.0.0",
     "prek>=0.2.28",
@@ -103,6 +104,14 @@ repository = "https://github.com/libranet/uv-developer"
 "Issues" = "https://github.com/libranet/uv-developer/issues"
 "Releases" = "https://github.com/libranet/uv-developer/releases"
 documentation = "https://uv-developer.readthedocs.io"
+
+
+[tool.codespell]
+# awaiting qupport for .gitignore
+# see https://github.com/codespell-project/codespell/issues/1887
+# for now use: uv run codespell $(git ls-files)
+ignore-words-list = "Hove"
+skip = "uv.lock, var"
 
 
 [tool.coverage.html]
