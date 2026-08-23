@@ -22,7 +22,7 @@ build-backend = "uv_build"
 
 [project]
 name = "uv-developer"
-version = "0.1"
+version = "0.1.1.dev1"
 license = { file = "license.md" }
 description = "Toggle [tool.uv.sources] local path overrides in pyproject.toml on and off, and guard against committing them."
 readme = "docs/readme.md"
