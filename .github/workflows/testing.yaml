@@ -1,0 +1,142 @@
+# Testing - Github Actions
+#
+# Security references:
+#  - https://securitylab.github.com/resources/github-actions-preventing-pwn-requests
+#  - https://securitylab.github.com/resources/github-actions-untrusted-input
+#  - https://securitylab.github.com/resources/github-actions-building-blocks
+#  - https://securitylab.github.com/resources/github-actions-new-patterns-and-mitigations
+#
+# Used actions:
+#   - actions/checkout
+#     repo: https://github.com/actions/checkout
+#     releases: https://github.com/actions/checkout/tags
+#
+#   - astral-sh/setup-uv: set up uv environment
+#     repo: https://github.com/astral-sh/setup-uv
+#     releases: https://github.com/astral-sh/setup-uv/tags
+#     docs: https://docs.astral.sh/uv/guides/integration/github/
+
+
+name: Testing
+
+concurrency:
+    # see https://docs.github.com/en/actions/using-jobs/using-concurrency
+    # Run jobs on all commits - we're on free tier and want full diagnostic history
+    # cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+    group: ${{ github.workflow }}-${{ github.ref }}
+
+env:
+    # Enable colored output for pytest
+    # https://github.com/pytest-dev/pytest/issues/7443
+    # https://github.com/actions/runner/issues/241
+    PY_COLORS: 1
+
+    # Pin just version for reproducible builds
+    # https://github.com/casey/just/releases
+    JUST_VERSION: "1.58.0"
+
+    # Pin uv version for reproducible builds
+    # https://github.com/astral-sh/uv/releases
+    UV_VERSION: "0.12.5"
+
+on:
+    pull_request:
+        types: [opened, reopened, synchronize]
+    push:
+        branches:
+            - main
+
+permissions:
+    contents: read
+
+jobs:
+    # see https://docs.astral.sh/uv/guides/integration/github/
+    python-tests:
+        name: python
+        runs-on: ${{ matrix.os }}
+        timeout-minutes: 10
+        defaults:
+            run:
+                # Force bash everywhere (incl. windows-latest, which ships Git Bash) so the
+                # ${VAR}-style shell steps below behave identically across the matrix instead of
+                # falling back to pwsh's incompatible syntax on Windows.
+                shell: bash
+        strategy:
+            fail-fast: false
+            matrix:
+                os:
+                    - ubuntu-latest
+                python-version:
+                    - "3.15"
+                    - "3.14"
+                    - "3.13"
+                    - "3.12"
+                    - "3.11"
+                    - "3.10"
+                    - "3.9"
+                include:
+                    # Exercise the Windows-specific code paths at least once per run, matching the
+                    # "Operating System :: Microsoft :: Windows" classifier in pyproject.toml.
+                    - os: windows-latest
+                      python-version: "3.14"
+
+        steps:
+
+        # repo: https://github.com/actions/checkout
+        # releases: https://github.com/actions/checkout/tags
+        - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+          with:
+              persist-credentials: false
+              fetch-depth: 0
+
+        # repo: https://github.com/extractions/setup-just
+        # releases: https://github.com/extractions/setup-just/releases
+        - name: Install pinned version of just
+          uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3  # v4.0.0
+          with:
+              just-version: ${{ env.JUST_VERSION }}
+
+        # repo: https://github.com/astral-sh/setup-uv
+        # releases: https://github.com/astral-sh/setup-uv/tags
+        # docs: https://docs.astral.sh/uv/guides/integration/github
+        - name: Install pinned version of uv
+          uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d  # v10.0.1
+          with:
+              cache-dependency-glob: "uv.lock"
+              enable-cache: true
+              prune-cache: true
+              python-version: ${{ matrix.python-version }}
+              version: ${{ env.UV_VERSION }}
+
+        - name: Set up Python ${{ matrix.python-version }}
+          env:
+              PYTHON_VERSION: ${{ matrix.python-version }}
+          run: uv python install "${PYTHON_VERSION}"
+
+        - name: Remove global sitecustomize.py
+          # Ubuntu-only: unblocks our own sitecustomize entrypoint from the one preinstalled on
+          # the runner image. Nothing equivalent exists to remove on windows-latest.
+          if: runner.os == 'Linux'
+          run: just ubuntu-remove-global-sitecustomize
+
+        - name: Install project + dependencies
+          env:
+              PYTHON_VERSION: ${{ matrix.python-version }}
+          run: |
+              just uv-set-python-version "${PYTHON_VERSION}"
+              just install
+
+        - name: Run pytest with coverage
+          run: |
+              just pytest-cov
+
+        # repo: https://github.com/codecov/codecov-action
+        # releases: https://github.com/codecov/codecov-action/tags
+        - name: "Upload coverage to Codecov"
+          uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f  # v7.0.0
+          with:
+              fail_ci_if_error: false # optional (default = false)
+              files: var/coverage/pytest-cobertura.xml
+              flags: unittests # optional
+              token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+              verbose: true # optional (default = false)
