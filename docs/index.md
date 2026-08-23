@@ -14,6 +14,7 @@ introduction
 installation
 usage
 reference
+changes
 contributing
 Code of Conduct <codeofconduct>
 License <license>
