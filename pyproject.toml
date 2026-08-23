@@ -57,6 +57,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "ruff>=0.8.6",
+    "toml-cli>=0.7.0",
 ]
 docs = [
     "docutils!=0.21",  # Work-around for https://github.com/pypi/warehouse/issues/15749
