@@ -28,6 +28,7 @@ create-dirs:
 
 # symlinks to venv-dirs to make bin/python work
 [group: 'dir-structure']
+[unix]
 symlink-venv-dirs:
     @ echo -e "Creating .venv-symlinks:"
     ln -sf .venv/bin
@@ -35,6 +36,17 @@ symlink-venv-dirs:
     ln -sf .venv/lib64
     ln -sf .venv/pyvenv.cfg
     @ echo -e ""
+
+# symlinks to venv-dirs to make bin/python work
+[group: 'dir-structure']
+[windows]
+symlink-venv-dirs:
+    #!pwsh
+    Write-Host "Creating .venv-symlinks"
+    New-Item -ItemType SymbolicLink -Name "bin" -Target ".venv/Scripts" -Force | Out-Null
+    New-Item -ItemType SymbolicLink -Name "lib" -Target ".venv/Lib" -Force | Out-Null
+    New-Item -ItemType SymbolicLink -Name "pyvenv.cfg" -Target ".venv/pyvenv.cfg" -Force | Out-Null
+    Write-Host ""
 
 
 # remove venv-symlinks
