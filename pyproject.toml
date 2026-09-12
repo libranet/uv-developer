@@ -50,7 +50,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "cyclopts>=3.24,<4",  # cyclopts>=4 changed App.__call__ to always sys.exit(), breaking CLI tests
+    "cyclopts>=4.25,<5",  # cyclopts>=4 changed App.__call__ to always sys.exit(), breaking CLI tests
     "rich>=15.0.0",
 ]
 
