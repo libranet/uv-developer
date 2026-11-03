@@ -3,7 +3,26 @@
   "extends": [
     "config:recommended"
   ],
+  "labels": ["dependencies"],
+  "minimumReleaseAge": "7 days",
+  "platformAutomerge": false,
+  "automergeStrategy": "squash",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 5am on the first day of the month"],
+    "automerge": true
+  },
   "packageRules": [
+    {
+      "description": "Auto-merge non-major updates once every CI check on the branch has passed. Renovate merges itself (platformAutomerge=false) because main has no required status checks, so GitHub native auto-merge would not wait for CI.",
+      "matchUpdateTypes": ["minor", "patch", "digest", "pin", "pinDigest", "bump"],
+      "automerge": true
+    },
+    {
+      "description": "Major updates always need a manual review.",
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
     {
       "description": "cyclopts>=4 makes App.__call__ always sys.exit() (breaks CLI tests); cyclopts>=5 requires Python>=3.11. Keep in sync with pyproject.toml.",
       "matchPackageNames": ["cyclopts"],
