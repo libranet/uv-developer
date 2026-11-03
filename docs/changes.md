@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented anti-chronologically in this file.
 
-## Unreleased
+## 0.2 (2026-11-03)
 
 - Drop support for Python 3.9 and 3.10 (both end-of-life); `requires-python` is now `>=3.11`.
   Removes the 3.9-only workarounds (`tp.Optional` for cyclopts, coverage pragmas for the
