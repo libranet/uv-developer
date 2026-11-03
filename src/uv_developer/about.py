@@ -5,7 +5,7 @@ The package must be properly installed in order the metadata to be available.
 
 """
 
-from __future__ import annotations  # make | in typing work in Python 3.8
+from __future__ import annotations
 
 import importlib.metadata
 
@@ -24,7 +24,7 @@ except importlib.metadata.PackageNotFoundError:  # pragma: no cover
 
 def _get(key: str) -> str | None:
     """Return a metadata field, or None when unavailable/unset."""
-    return metadata.get(key) if metadata is not None else None
+    return metadata[key] if metadata is not None and key in metadata else None
 
 
 authors: str | list[str] = _get("Author-email") or "unknown"

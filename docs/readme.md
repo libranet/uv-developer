@@ -26,7 +26,7 @@ See [Introduction] for the full problem this solves.
 
 ## Requirements
 
-- Python >= 3.9
+- Python >= 3.11
 - [uv]
 
 ## Installation
