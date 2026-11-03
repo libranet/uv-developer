@@ -94,7 +94,7 @@ jobs:
         - name: Install pinned version of just
           uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3  # v4.0.0
           with:
-              just-version: ${{ env.JUST_VERSION }}
+              just-version: ${{ env.JUST_VERSION }}  # zizmor: ignore[unpinned-tools] pinned via env.JUST_VERSION
 
         # repo: https://github.com/astral-sh/setup-uv
         # releases: https://github.com/astral-sh/setup-uv/tags
