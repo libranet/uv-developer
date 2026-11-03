@@ -2,5 +2,12 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "packageRules": [
+    {
+      "description": "cyclopts>=4 makes App.__call__ always sys.exit() (breaks CLI tests); cyclopts>=5 requires Python>=3.11. Keep in sync with pyproject.toml.",
+      "matchPackageNames": ["cyclopts"],
+      "allowedVersions": "<4"
+    }
   ]
 }
