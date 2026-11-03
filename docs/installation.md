@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Python >= 3.9
+- Python >= 3.11
 - [uv](https://docs.astral.sh/uv/), to resolve and install the local-path overrides once
   `toggle` has enabled them
 

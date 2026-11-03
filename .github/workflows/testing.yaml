@@ -72,8 +72,6 @@ jobs:
                     - "3.13"
                     - "3.12"
                     - "3.11"
-                    - "3.10"
-                    - "3.9"
                 include:
                     # Exercise the Windows-specific code paths at least once per run, matching the
                     # "Operating System :: Microsoft :: Windows" classifier in pyproject.toml.

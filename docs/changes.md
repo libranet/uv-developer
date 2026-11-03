@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented anti-chronologically in this file.
 
+## Unreleased
+
+- Drop support for Python 3.9 and 3.10 (both end-of-life); `requires-python` is now `>=3.11`.
+  Removes the 3.9-only workarounds (`tp.Optional` for cyclopts, coverage pragmas for the
+  pre-PEP 626 line table), targets ruff at `py311`, and defaults `.python-version` to 3.11.
+
 ## 0.1.1 (2026-11-03)
 
 Maintenance release: no changes to the package code or its runtime dependencies.

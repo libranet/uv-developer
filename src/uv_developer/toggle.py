@@ -40,12 +40,7 @@ def parse_source_entries(lines: list[str]) -> list[SourceEntry]:
             in_uv_sources = False
 
         if not in_uv_sources or not stripped:
-            # This *is* exercised (see test_toggle_sources_reports_no_entries and friends), but
-            # CPython 3.9's bytecode line-table doesn't emit a distinct trace event for a bare
-            # `continue` as the sole body of an `or`-guarded `if` here -- coverage.py sees it as
-            # never hit. Fixed by PEP 626 (Python 3.10+); confirmed by running the same suite
-            # under 3.13, where this line and its branch both report 100%.
-            continue  # pragma: no cover
+            continue
 
         match = SOURCE_KEY_RE.match(line)
         if not match:
@@ -102,11 +97,7 @@ def toggle_sources(mode: ToggleMode | None, pyproject: pl.Path) -> tuple[ToggleM
             if entry.pinned:
                 continue
             ensure_cloned(project_root, entry)
-            # Both branches are exercised (test_toggle_sources_warns_when_missing_clone_comment
-            # enters it, test_toggle_sources_no_write_when_already_in_target_mode skips it), but
-            # CPython 3.9's bytecode line-table doesn't record the "skip straight to `continue`"
-            # arc here as taken -- same PEP 626 limitation as above, confirmed fixed under 3.13.
-            if entry.line.strip().startswith("#"):  # pragma: no branch
+            if entry.line.strip().startswith("#"):
                 updated_lines[entry.idx] = re.sub(r"^\s*#\s*", "", entry.line)
                 changed = True
             continue

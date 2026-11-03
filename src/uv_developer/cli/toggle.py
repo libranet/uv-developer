@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import pathlib as pl
-import typing as tp  # `X | None` breaks cyclopts' runtime introspection on Python 3.9
 
 import cyclopts
 
@@ -16,7 +15,7 @@ app: cyclopts.App = cyclopts.App(name="toggle")
 
 
 @app.default()
-def toggle(action: tp.Optional[str] = None, pyproject: pl.Path = pl.Path("pyproject.toml")) -> None:  # noqa: UP045
+def toggle(action: str | None = None, pyproject: pl.Path = pl.Path("pyproject.toml")) -> None:
     """Toggle [tool.uv.sources] local path overrides in pyproject.toml.
 
     By default (no action), the command auto-toggles:
